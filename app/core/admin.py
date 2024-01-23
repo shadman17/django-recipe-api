@@ -1,5 +1,5 @@
 """
-Django admin customization
+Django admin customization.
 """
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
@@ -13,13 +13,10 @@ class UserAdmin(BaseUserAdmin):
     ordering = ['id']
     list_display = ['email', 'name']
     fieldsets = (
-        (None, {
-            'fields': (
-                'email', 'password'
-            ),
-        }),
+        (None, {'fields': ('email', 'password')}),
+        (_('Personal Info'), {'fields': ('name',)}),
         (
-            _('Permission'),
+            _('Permissions'),
             {
                 'fields': (
                     'is_active',
@@ -28,15 +25,7 @@ class UserAdmin(BaseUserAdmin):
                 )
             }
         ),
-        (
-            _('Important dates'),
-            {
-                'fields': (
-                    'last_login',
-                )
-            }
-        )
-
+        (_('Important dates'), {'fields': ('last_login',)}),
     )
     readonly_fields = ['last_login']
     add_fieldsets = (
